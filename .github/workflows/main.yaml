@@ -10,22 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      -  uses: actions/checkout@v2
-      -  uses: actions/setup-node@v2
-          with: 
-            node-version: 18
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
 
-    - name: Fetch JSON data
-      run: |
-        curl -o data.json "https://ap-south-1.aws.data.mongodb-api.com/app/blue-splash-kurxzvd/endpoint/products"
+      - name: Fetch JSON data
+        run: |
+          curl -o data.json "https://ap-south-1.aws.data.mongodb-api.com/app/blue-splash-kurxzvd/endpoint/products"
 
-    - name: Compress JSON data
-      run: |
-        gzip data.json
+      - name: Compress JSON data
+        run: |
+          gzip data.json
 
-    - name: Upload compressed file
-      uses: actions/upload-artifact@v2
-      with:
-        name: data.json.gz
-        path: data.json.gz
+      - name: Upload compressed file
+        uses: actions/upload-artifact@v2
+        with:
+          name: data.json.gz
+          path: data.json.gz
