@@ -18,6 +18,10 @@ jobs:
         with:
           node-version: 18
 
+      - name: Remove old file
+        run: |
+          rm data.json && rm data.json.gz
+          
       - name: Fetch JSON data
         run: |
           curl -o data.json "https://ap-south-1.aws.data.mongodb-api.com/app/blue-splash-kurxzvd/endpoint/products"
