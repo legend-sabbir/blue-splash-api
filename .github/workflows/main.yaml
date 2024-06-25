@@ -23,11 +23,14 @@ jobs:
 
       - name: Remove old file
         run: |
-          rm -f data.json data.json.gz
+          rm -f data.json.gz
           
       - name: Fetch JSON data
         run: |
           curl -o data.json "https://ap-south-1.aws.data.mongodb-api.com/app/blue-splash-kurxzvd/endpoint/products"
+
+      - name: Modify JSON data
+        run: node script.cjs
 
       - name: Compress JSON data
         run: |
