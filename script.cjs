@@ -11,12 +11,13 @@ const updatedData = products
     return Object.assign(p, item);
   })
   .sort((a, b) => a.order - b.order)
+  .filter(p => p.stock > 0)
   .map(p => {
-    delete p._id
-    delete p.stock
-    delete p.order
-    return p
+    const obj = p
+    delete obj._id
+    delete obj.stock
+    delete obj.order
+    return obj
   })
-  .filter(p => p.stock > 0);
 
 fs.writeFileSync("data.json", JSON.stringify(updatedData));
