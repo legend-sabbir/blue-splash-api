@@ -15,7 +15,7 @@ jobs:
         with:
           persist-credentials: true
           fetch-depth: 0
-        
+
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
@@ -27,14 +27,14 @@ jobs:
           
       - name: Fetch JSON data
         run: |
-          curl -o data.json "https://ap-south-1.aws.data.mongodb-api.com/app/blue-splash-kurxzvd/endpoint/products"
+          curl -o products.json "https://ap-south-1.aws.data.mongodb-api.com/app/blue-splash-kurxzvd/endpoint/products" && curl -o customized.json "https://ap-south-1.aws.data.mongodb-api.com/app/blue-splash-kurxzvd/endpoint/customized"
 
       - name: Modify JSON data
         run: node script.cjs
 
       - name: Compress JSON data
         run: |
-          gzip data.json
+          gzip data.json && rm -rf products.json && rm -rf customized.json
 
       - name: Commit and push changes
         env:
