@@ -10,7 +10,7 @@ const updatedData = products
     const item = customizedMap.get(p.productId);
     return Object.assign(p, item);
   })
-  .sort((a, b) => a.order - b.order)
+  .sort((a, b) => (a.order ?? 9999) - (b.order ?? 9999))
   .filter(p => p.stock > 0)
   .map(p => {
     const obj = p
